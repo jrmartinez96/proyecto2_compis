@@ -54,22 +54,15 @@ keywordsRegularExpression = keywordsRegularExpression.substring(0, keywordsRegul
 let regularExpression = '';
 compiler.tokensDeclarations.forEach(decl => {
     decl.toRegularExpression(compiler.charactersSetDeclarations);
-    console.log(decl.ident);
-    console.log(decl.regularExpression);
 
     regularExpression = regularExpression + "(" + decl.regularExpression + ")|"
 })
 regularExpression = regularExpression.substring(0, regularExpression.length - 1);
-
-console.log("Regular expression: ");
-console.log(regularExpression);
 
 const treeNode = re_to_tree(regularExpression);
 const afd = convertAFDToD3Graph(treeNode);
 
 const keywordsTreeNode = re_to_tree(keywordsRegularExpression);
 const keywordsAfd = convertAFDToD3Graph(keywordsTreeNode);
-
-console.log(afd);
 
 const pythonFile = writePythonFile(compiler, afd, keywordsAfd);

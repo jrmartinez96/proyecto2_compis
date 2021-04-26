@@ -26,7 +26,6 @@ export const evaluate_afd = (expression: String, treeNode: TreeNode): boolean =>
         for (let iExpression = 0; iExpression < expression.length; iExpression++) {
             const expressionCharacter = expression[iExpression];
             currentStateName = evaluateCharacter(currentStateName, expressionCharacter, afd);
-            console.log(currentStateName);
 
             if (currentStateName === null) {
                 itBelongs = itBelongs || false;
