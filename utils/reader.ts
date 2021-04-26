@@ -79,8 +79,8 @@ const determinePhase = function(line: String, currentPhase: String) {
 }
 
 export const writePythonFile = function(compiler: Compiler, afd: Afd, keywordsAfd: Afd) {
-    const base1 = fs.readFileSync(__dirname + '/generated/base1.py');
-    const base2 = fs.readFileSync(__dirname + '/generated/base2.py');
+    const base1 = fs.readFileSync(__dirname + '/bases/base1.py');
+    const base2 = fs.readFileSync(__dirname + '/bases/base2.py');
     fs.writeFileSync(__dirname + `/generated/${compiler.name}.py`, '');
 
     // agregar primera parte del archivo
