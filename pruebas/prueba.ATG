@@ -1,0 +1,23 @@
+COMPILER Aritmetica    
+
+CHARACTERS 
+
+letter = "ABCDEF". 
+digit = "0123" .
+tab = CHR(9).
+eol = CHR(10).
+
+KEYWORDS
+
+while = "while".
+do = "do".
+if = "if".
+switch = "switch"
+
+TOKENS
+
+ident = letter{letter|digit} EXCEPT KEYWORDS.
+number = digit{digit}.
+
+
+END Aritmetica

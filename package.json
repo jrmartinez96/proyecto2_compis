@@ -1,0 +1,27 @@
+{
+  "name": "Proyecto2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/line-reader": "0.0.33",
+    "@types/n-readlines": "^1.0.1",
+    "@types/uuid": "^8.3.0",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "@types/node": "^14.14.41",
+    "n-readlines": "^1.0.1",
+    "uuid": "^8.3.2"
+  }
+}
