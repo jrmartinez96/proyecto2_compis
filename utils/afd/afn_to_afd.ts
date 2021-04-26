@@ -183,7 +183,7 @@ const convertCharacterSetToState = (transitionTable: any, languageCharacters: Ar
     return newTransitionTable;
 }
 
-export const convertAFDToD3Graph = (treeNode: TreeNode): any => {
+export const convertAFDToD3Graph = (treeNode: TreeNode): Afd => {
     let nodes: Array<any> = [];
     let links: Array<any> = [];
 
@@ -206,6 +206,15 @@ export const convertAFDToD3Graph = (treeNode: TreeNode): any => {
         });
     })
 
-    return {nodes: nodes, links:links};
+    return new Afd(nodes, links);
 }
 
+export class Afd {
+    nodes: Array<any>;
+    links: Array<any>;
+
+    constructor(nodes: Array<any>, links: Array<any>) {
+        this.nodes = nodes;
+        this.links = links;
+    }
+}
