@@ -10,6 +10,6 @@ En el proyecto se puede correr:
 
 Para instalar las dependencias
 
-### `npm run start`
+### `npm run start --cocor={nombre de archivo}.ATG`
 
-Para correr el proyecto
+Comando para crear scanner, el archivo .ATG tiene que estar dentro de la carpeta de 'pruebas'.

@@ -5,7 +5,7 @@ import { TokenDeclaration } from './utils/classes/Tokens';
 import { re_to_tree } from './utils/arbol_sintactico/re_to_tree';
 import { convertAFDToD3Graph,  } from './utils/afd/afn_to_afd';
 
-const lines = readFile('pruebas/prueba.ATG');
+const lines = readFile(`pruebas/${process.env.npm_config_cocor}`);
 
 const compiler = readLines(lines);
 

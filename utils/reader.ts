@@ -97,6 +97,8 @@ export const writePythonFile = function(compiler: Compiler, afd: Afd, keywordsAf
     afd.links.forEach(link => {
         let linkValue = link['label'];
         if (link['label'] === '\n') {
+            linkValue = '\\n';
+        } else if (link['label'] === '\r') {
             linkValue = '\\r';
         }
         content = content + `links.append(Link('${link['source']}', '${link['target']}', '${linkValue}'))\r`;
