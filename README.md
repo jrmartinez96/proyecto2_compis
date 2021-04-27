@@ -10,6 +10,9 @@ En el proyecto se puede correr:
 
 Para instalar las dependencias
 
+### `npm install -g ts-node`
+Para instalar ts-node en el sistema (es necesario para correr el proyecto)
+
 ### `npm run start --cocor={nombre de archivo}.ATG`
 
 Comando para crear scanner, el archivo .ATG tiene que estar dentro de la carpeta de 'pruebas'.
