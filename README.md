@@ -1,6 +1,6 @@
 # Proyecto 2 - Scanner
 
-Video de presentacion de el funcionamiento y arquitectura: 
+Video de presentacion de el funcionamiento y arquitectura: https://youtu.be/5DNMCuq7mb0
 
 ## Comandos en consola disponibles
 
