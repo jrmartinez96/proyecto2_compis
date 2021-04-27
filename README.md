@@ -1,6 +1,7 @@
 # Proyecto 2 - Scanner
 
 Video de presentacion de el funcionamiento y arquitectura: https://youtu.be/5DNMCuq7mb0
+Repositorio de proyecto 1: https://github.com/jrmartinez96/proyecto1_compis
 
 ## Comandos en consola disponibles
 
