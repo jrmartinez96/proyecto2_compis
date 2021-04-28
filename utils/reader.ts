@@ -81,7 +81,7 @@ const determinePhase = function(line: String, currentPhase: String) {
 export const writePythonFile = function(compiler: Compiler, afd: Afd, keywordsAfd: Afd) {
     const base1 = fs.readFileSync(__dirname + '/bases/base1.py');
     const base2 = fs.readFileSync(__dirname + '/bases/base2.py');
-    fs.writeFileSync(__dirname + `/generated/${compiler.name}.py`, '');
+    fs.writeFileSync(__dirname.substring(0, __dirname.length - 6) + `/generated/${compiler.name}.py`, '');
 
     // agregar primera parte del archivo
     let content = base1.toString('utf8');
@@ -118,5 +118,5 @@ export const writePythonFile = function(compiler: Compiler, afd: Afd, keywordsAf
 
     // agregar segunda parte del programa
     content = content + base2.toString('utf8');
-    fs.appendFile(__dirname + `/generated/${compiler.name}.py`, content, (err)=>{});
+    fs.appendFile(__dirname.substring(0, __dirname.length - 6) + `/generated/${compiler.name}.py`, content, (err)=>{});
 };
