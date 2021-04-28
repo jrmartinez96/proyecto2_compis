@@ -13,7 +13,7 @@ class Link:
         self.label = label
 
 def separate_words(fileRead):
-    words = []
+    words = [] 
     currentWord = ''
     for character in fileRead:
         if character != " ":
