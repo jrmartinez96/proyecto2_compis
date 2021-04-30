@@ -107,7 +107,7 @@ export const writePythonFile = function(compiler: Compiler, afd: Afd, keywordsAf
 
     // Keywords nodes
     keywordsAfd.nodes.forEach(node => {
-        content = content + `keywordsNodes.append(Node('${node['id']}', '${node['isInitial'] ? 'True' : 'False'}', '${node['isFinal'] ? 'True' : 'False'}'))\r`;
+        content = content + `keywordsNodes.append(Node('${node['id']}', ${node['isInitial'] ? 'True' : 'False'}, ${node['isFinal'] ? 'True' : 'False'}))\r`;
     });
     content = content + '\r'
     // Keywords Links

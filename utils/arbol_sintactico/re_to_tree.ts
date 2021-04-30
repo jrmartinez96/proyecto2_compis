@@ -2,7 +2,6 @@ import TreeNode from "./TreeNode";
 
 // Lee la expresion de fin a principio
 export const re_to_tree = (regularExpression: string): TreeNode => {
-
     const lastCharacter = regularExpression[regularExpression.length - 1];
 
     if (lastCharacter === '*') {
@@ -35,37 +34,39 @@ export const re_to_tree = (regularExpression: string): TreeNode => {
         const unionNode = new TreeNode(unionNodeType, '', re_to_tree(nextExpression), kleeneNode);
 
         return unionNode;
-    } else if (lastCharacter === '+') {
-        let childKleenePos: TreeNode;
-        const secondLastCharacter = regularExpression[regularExpression.length - 2];
-        let nextExpression = regularExpression.substring(0, regularExpression.length - 1);
+    } 
+    // else if (lastCharacter === '+') {
+    //     let childKleenePos: TreeNode;
+    //     const secondLastCharacter = regularExpression[regularExpression.length - 2];
+    //     let nextExpression = regularExpression.substring(0, regularExpression.length - 1);
 
-        if (secondLastCharacter !== ')') {
-            nextExpression = regularExpression.substring(0, regularExpression.length - 2);
-            childKleenePos = re_to_tree(secondLastCharacter);
-        } else {
-            const parethesesExpression = get_expr_from_parentheses(nextExpression);
-            childKleenePos = re_to_tree(parethesesExpression);
-            nextExpression = regularExpression.substring(0, regularExpression.length - (parethesesExpression.length + 3));
-        }
+    //     if (secondLastCharacter !== ')') {
+    //         nextExpression = regularExpression.substring(0, regularExpression.length - 2);
+    //         childKleenePos = re_to_tree(secondLastCharacter);
+    //     } else {
+    //         const parethesesExpression = get_expr_from_parentheses(nextExpression);
+    //         childKleenePos = re_to_tree(parethesesExpression);
+    //         nextExpression = regularExpression.substring(0, regularExpression.length - (parethesesExpression.length + 3));
+    //     }
 
-        const kleenePosNode = new TreeNode(4, '', null, childKleenePos);
+    //     const kleenePosNode = new TreeNode(4, '', null, childKleenePos);
 
-        if (nextExpression === '') {
-            return kleenePosNode;
-        }
+    //     if (nextExpression === '') {
+    //         return kleenePosNode;
+    //     }
 
-        let unionNodeType = 0;
-        if (nextExpression[nextExpression.length - 1] === '|') {
-            unionNodeType = 1; // OR
-            nextExpression = nextExpression.substring(0, nextExpression.length - 1);
-        } else {
-            unionNodeType = 2; // CONCAT
-        }
-        const unionNode = new TreeNode(unionNodeType, '', re_to_tree(nextExpression), kleenePosNode);
+    //     let unionNodeType = 0;
+    //     if (nextExpression[nextExpression.length - 1] === '|') {
+    //         unionNodeType = 1; // OR
+    //         nextExpression = nextExpression.substring(0, nextExpression.length - 1);
+    //     } else {
+    //         unionNodeType = 2; // CONCAT
+    //     }
+    //     const unionNode = new TreeNode(unionNodeType, '', re_to_tree(nextExpression), kleenePosNode);
 
-        return unionNode;
-    } else if (lastCharacter === '?') {
+    //     return unionNode;
+    // } 
+    else if (lastCharacter === '?') {
         let childZeroOrInstance: TreeNode;
         const secondLastCharacter = regularExpression[regularExpression.length - 2];
         let nextExpression = regularExpression.substring(0, regularExpression.length - 1);

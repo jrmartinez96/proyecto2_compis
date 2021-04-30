@@ -54,7 +54,7 @@ class BasicSet {
         // Set type
         if (basicSet[0] === '"') {
             this.type = 0;
-        } else if (basicSet.includes('CHR(') || basicSet[0] === '\'') {
+        } else if (basicSet.includes('CHR(') || basicSet[0] === "'") {
             if (basicSet.includes('..')) {
                 this.type = 3;
             } else {
@@ -77,7 +77,7 @@ class BasicSet {
                 const charValue = parseInt(basicSet.substring(parenthesisOpenIndex + 1, parenthesisCloseIndex));
                 const char = new Char(charValue, 1);
                 this.value = char;
-            } else if (basicSet[0] === '\'') {
+            } else if (basicSet[0] === "'") {
                 const charValue = basicSet[1];
                 const char = new Char(charValue, 0);
                 this.value = char;
@@ -131,11 +131,17 @@ class BasicSet {
         } else if (this.type === 1 && typeof this.value === 'string') { // si es un ident
             let identCharacterDecl = new CharacterSetDecl();
 
-            currentCharactersDecl.forEach(characterDecl => {
-                if (this.value === characterDecl.ident) {
-                    identCharacterDecl = characterDecl; 
-                }
-            });
+            if (this.value === 'ANY') {
+                identCharacterDecl.setCharacterSetDecl('ANY = CHR(65) ... CHR(75).')
+                identCharacterDecl.toRegularExpression([]);
+            } else {
+                currentCharactersDecl.forEach(characterDecl => {
+                    if (this.value === characterDecl.ident) {
+                        identCharacterDecl = characterDecl; 
+                    }
+                });
+            }
+
             let identRegularExpression = identCharacterDecl.regularExpression.toString();
             regularExpression = identRegularExpression.substring(1, identRegularExpression.length - 1);
         } else if (this.type === 2 && this.value instanceof Char) { // si es char
@@ -160,7 +166,54 @@ class CharacterSet {
 
     constructor() {};
 
-    setCharacterSet(set: String){
+    setCharacterSet(set: String) {
+        let openQuotes = 0;
+        let openSingleQuotes = 0;
+
+        let currentBasicSet = ''
+
+        for (let i = 0; i < set.length; i++) {
+            const character = set[i];
+            
+            if (character === '+' || character === '-') {
+                if (openQuotes === 0 && openSingleQuotes === 0) {
+                    const basicSet = new BasicSet();
+                    basicSet.setBasicSet(currentBasicSet);
+
+                    this.basicSets.push(basicSet);
+                    currentBasicSet = character;
+                } else {
+                    currentBasicSet = currentBasicSet + character;
+                }
+            } else {
+                currentBasicSet = currentBasicSet + character;
+
+                if (character === '"') {
+                    if (openQuotes === 1) {
+                        openQuotes = openQuotes - 1;
+                    } else {
+                        openQuotes++;
+                    }
+                } else if (character === "'") {
+                    if (openSingleQuotes === 1) {
+                        openSingleQuotes = openSingleQuotes - 1;
+                    } else {
+                        openSingleQuotes++;
+                    }
+                }
+
+                if (i === set.length - 1) {
+                    const basicSet = new BasicSet();
+                    basicSet.setBasicSet(currentBasicSet.substring(0, currentBasicSet.length - 1).trim());
+
+                    this.basicSets.push(basicSet);
+                }
+            }
+        }
+
+    }
+
+    newSetCharacterSet(set: String){
         let plusSignIndex = set.indexOf('+');
         let minusSignIndex = set.indexOf('-');
         const dotSignIndex = set.lastIndexOf('.');
@@ -208,8 +261,7 @@ class CharacterSet {
         for (let i = 0; i < regularExpression2.length; i++) {
             const char = regularExpression2[i];
 
-            let re = new RegExp(char,"g");
-            regularExpression1 = regularExpression1.replace(re, '');
+            regularExpression1 = this.deleteAllOccurences(char, regularExpression1).toString();
         }
 
         for (let i = 0; i < regularExpression1.length; i++) {
@@ -220,6 +272,16 @@ class CharacterSet {
         regularExpression = regularExpression.substring(0, regularExpression.length - 1);
 
         return regularExpression;
+    }
+
+    deleteAllOccurences(character: String, base: String): String {
+        let newBase = base;
+
+        while(newBase.indexOf(character.toString()) !== -1) {
+            newBase = newBase.replace(character.toString(), '');
+        }
+
+        return newBase;
     }
 
     toRegularExpression(currentCharactersDecl: Array<CharacterSetDecl>): String {
