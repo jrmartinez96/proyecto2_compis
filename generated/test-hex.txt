@@ -1,0 +1,2 @@
+while do aAz123 hola 10 0FH
+0FH -10 10

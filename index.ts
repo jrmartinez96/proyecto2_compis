@@ -61,10 +61,12 @@ compiler.tokensDeclarations.forEach(decl => {
     regularExpression = regularExpression + "(" + decl.regularExpression + ")|"
 })
 regularExpression = regularExpression.substring(0, regularExpression.length - 1);
+console.log(regularExpression);
 
 const treeNode = re_to_tree(regularExpression);
 const afd = convertAFDToD3Graph(treeNode);
 
+console.log(keywordsRegularExpression);
 const keywordsTreeNode = re_to_tree(keywordsRegularExpression);
 const keywordsAfd = convertAFDToD3Graph(keywordsTreeNode);
 

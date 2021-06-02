@@ -59,6 +59,36 @@ def test_word(word, nodes, links):
     
     return itBelongs
 
+def link_exists(word, nodes, links):
+    initialStates = []
+    acceptStates = []
+
+    for node in nodes:
+        if node.isInitial:
+            initialStates.append(node)
+        if node.isFinal:
+            acceptStates.append(node)
+    
+    linkExists = True
+
+    # recorrer los estados iniciales
+    for initialState in initialStates:
+        currentState = initialState
+
+        # verificar cada letra de la palabra en el afd
+        for iWord in range(len(word)):
+            letter = word[iWord]
+
+            currentState = evaluate_character(letter, currentState, nodes, links)
+
+            if (currentState == -1):
+                linkExists = False
+                break
+            else:
+                linkExists = True
+    
+    return linkExists
+
 # Devuelve -1 si no existe transicion desde el nodo hacia otro con la letter, de lo contrario devuelve el nodo target
 def evaluate_character(letter, currentState, nodes, links):
     initialState = currentState
@@ -80,7 +110,7 @@ def evaluate_character(letter, currentState, nodes, links):
 # INICIO DE PROGRAMA
 testFileName = sys.argv[1]
 file = open(testFileName, "r")
-words = separate_words(file.read())
+content = file.read()
 
 # tokens y keywords
 tokens = []
