@@ -19,6 +19,27 @@ export class Compiler {
     // Tokens
     tokensLines: Array<String> = [];
     tokensDeclarations: Array<TokenDeclaration> = [];
+
+    // Productions
+    productionsLines: Array<String> = [];
+
+    compressProductionsLines() {
+        let newProductionsLines: Array<String> = [];
+        let productionLine: String = '';
+
+        this.productionsLines.forEach(line => {
+            if (line[line.length - 1] == '.') {
+                productionLine = productionLine.concat(line.toString());
+                newProductionsLines.push(productionLine);
+
+                productionLine = '';
+            } else {
+                productionLine = productionLine.concat(line.toString());
+            }
+        });
+
+        this.productionsLines = newProductionsLines;
+    }
 }
 
 /**
@@ -33,5 +54,6 @@ export class Compiler {
     'STANDBY': 'STANDBY',
     'CHARACTERS': 'CHARACTERS',
     'KEYWORDS': 'KEYWORDS',
-    'TOKENS': 'TOKENS'
+    'TOKENS': 'TOKENS',
+    'PRODUCTIONS': 'PRODUCTIONS'
 };

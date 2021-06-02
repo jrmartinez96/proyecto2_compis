@@ -58,6 +58,11 @@ export const readLines = function(lines: Array<String>): Compiler {
             if (phase == phases.TOKENS && line != phases.TOKENS) {
                 compiler.tokensLines.push(line);
             }
+
+            // Si la fase es PRODUCTIONS registrar la linea
+            if (phase == phases.PRODUCTIONS && line != phases.PRODUCTIONS) {
+                compiler.productionsLines.push(line.replace(/\t+/g, ''));
+            }
         }
         return true;
     });
@@ -73,6 +78,8 @@ const determinePhase = function(line: String, currentPhase: String) {
         phase = phases.KEYWORDS;
     } else if (line == phases.TOKENS) {
         phase = phases.TOKENS;
+    } else if (line == phases.PRODUCTIONS) {
+        phase = phases.PRODUCTIONS;
     }
 
     return phase;

@@ -33,6 +33,9 @@ compiler.tokensLines.forEach(line => {
     compiler.tokensDeclarations.push(tokenDecl);
 });
 
+// PRODUCTIONS
+compiler.compressProductionsLines();
+console.log(compiler.productionsLines)
 
 console.log(compiler.name);
 compiler.charactersSetDeclarations.forEach(setDecl => {
