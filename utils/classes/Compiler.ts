@@ -1,5 +1,6 @@
 import { CharacterSetDecl } from './Characters';
 import { KeywordDecl } from './Keywords'
+import { Production } from './Productions';
 import { TokenDeclaration } from './Tokens';
 
 export class Compiler {
@@ -22,6 +23,7 @@ export class Compiler {
 
     // Productions
     productionsLines: Array<String> = [];
+    productionsDeclarations: Array<Production> = [];
 
     compressProductionsLines() {
         let newProductionsLines: Array<String> = [];
@@ -30,7 +32,7 @@ export class Compiler {
         this.productionsLines.forEach(line => {
             if (line[line.length - 1] == '.') {
                 productionLine = productionLine.concat(line.toString());
-                newProductionsLines.push(productionLine);
+                newProductionsLines.push(productionLine.substring(0, productionLine.length - 1));
 
                 productionLine = '';
             } else {
