@@ -1,6 +1,6 @@
-# Proyecto 2 - Scanner
+# Proyecto 2 y 3 - Scanner y Parser
 
-Video de presentacion de el funcionamiento y arquitectura: https://youtu.be/5DNMCuq7mb0
+Video de presentacion de el funcionamiento y arquitectura: https://youtu.be/tqqOVb3fQdo
 
 Repositorio de proyecto 1: https://github.com/jrmartinez96/proyecto1_compis
 
